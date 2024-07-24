@@ -9,7 +9,7 @@ class BaseApi {
 
   productSale() {
     return axiosConfig({
-      url: `${this.uri}/1041230/products/EPQgJZotSihqHuEHBp1xP`,
+      url: `${this.uri}/1038653/products/YqhLPyoyqQGK36Iz-sIxz`,
       method: 'GET',
     });
   }

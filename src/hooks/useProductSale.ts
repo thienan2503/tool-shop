@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import BaseApi from "~/apiConfig/baseApi";
+import useApi from "./useApi";
 
 const useProductSale = () => {
   const [products, setProducts] = useState([]);
+  const { productSale } = useApi();
+  const { data: dataProduct, isLoading } = productSale;
 
   const getTopSale = () => {
     if (products.length <= 0) return;

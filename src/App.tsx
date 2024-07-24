@@ -1,12 +1,17 @@
-import UITabContent from "./components/UITabContent";
-import { tabContent } from "./config/tab.config";
+import { createElement } from "react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import DefaultLayout from "./layout/DefaultLayout";
+import { routers } from "./routes";
 
 function App() {
-  return (
-    <>
-      <UITabContent tabData={tabContent} />
-    </>
-  );
+  const routeElements = routers.map(({ link, element }) => ({
+    path: link,
+    element: <DefaultLayout>{createElement(element)}</DefaultLayout>,
+  }));
+
+  const router = createBrowserRouter(routeElements);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;

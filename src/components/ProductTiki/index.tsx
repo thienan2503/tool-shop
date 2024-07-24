@@ -29,7 +29,7 @@ const ProductTiki = () => {
         <Tr key={product.id}>
           <Td>{page + index}</Td>
           <Td>
-            <Tooltip label={product.name}>
+            <Tooltip placement="top" label={product.name}>
               <div
                 style={{
                   maxWidth: "300px",
@@ -77,7 +77,7 @@ const ProductTiki = () => {
           Next
         </Button>
       </Center>
-      <TableContainer maxWidth={"100vw"} mb={10}>
+      <TableContainer w={"100%"} mb={10}>
         <Table variant="striped" colorScheme="teal">
           <Thead>
             <Tr>
@@ -86,7 +86,7 @@ const ProductTiki = () => {
               <Th>Hình ảnh</Th>
               <Th isNumeric>Giá gốc</Th>
               <Th isNumeric>Giảm còn</Th>
-              <Th isNumeric>Giảm được</Th>
+              <Th isNumeric>Số tiền giảm</Th>
             </Tr>
           </Thead>
           {products.length > 0 ? (

@@ -2,7 +2,7 @@ import ProductTiki from "~/components/ProductTiki";
 
 const tabHead = [
   {
-    title: "Home",
+    title: "Tiki Sale",
   },
 ];
 

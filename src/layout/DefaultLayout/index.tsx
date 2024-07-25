@@ -1,6 +1,6 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, useBreakpointValue } from "@chakra-ui/react";
 import { ReactNode, useState } from "react";
-import MenuLayout from "~/components/MenuLayout";
+import DrawerLayout from "~/components/DrawerLayout";
 
 interface DefaultLayoutProps {
   children: ReactNode;
@@ -11,12 +11,14 @@ function DefaultLayout({ children }: DefaultLayoutProps) {
   const handleCloseMenu = () => {
     setIsOpen((prev) => !prev);
   };
+
+  // Use Chakra UI's useBreakpointValue hook to change the gap based on the current breakpoint
+  const gap = useBreakpointValue({ base: "20px", md: "46px" });
+
   return (
-    <Flex gap={"46px"}>
-      <MenuLayout isOpen={isOpen} onClose={handleCloseMenu} />
-      <Box mt={"60px"} flex={1} transition={"width 0.5s"}>
-        {children}
-      </Box>
+    <Flex flexDirection={"column"} gap={gap}>
+      <DrawerLayout />
+      <Box px="15px">{children}</Box>
     </Flex>
   );
 }

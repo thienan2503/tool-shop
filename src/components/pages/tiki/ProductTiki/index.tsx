@@ -10,7 +10,7 @@ const ProductTiki = () => {
   const renderTopSale = useMemo(() => {
     const dataRender = getTopSale();
 
-    if (!dataRender) return;
+    if (!dataRender) return [];
     return dataRender
       .slice(page - 1, page + 9)
       .map((product: any, index: number) => (
@@ -44,7 +44,7 @@ const ProductTiki = () => {
         </Tr>
       ));
   }, [products, page]);
-  
+
   return (
     <>
       <Center>

@@ -50,6 +50,7 @@ const ProductTiki = () => {
   });
 
   const renderTopSale = useMemo(() => {
+    if(!dataProduct?.data) return [];
     return dataProduct?.data
       .sort(
         (a: any, b: any) =>

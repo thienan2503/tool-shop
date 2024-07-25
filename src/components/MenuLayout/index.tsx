@@ -1,12 +1,11 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Box, Button, Link as ChakraLink, Flex } from "@chakra-ui/react";
+import { Link as ReactRouterLink } from "react-router-dom";
 import { routers } from "~/routes";
 
 interface MenuLayoutProps {
   isOpen: boolean;
   onClose: () => void;
 }
-
 const MenuLayout = ({ isOpen, onClose }: MenuLayoutProps) => {
   return (
     <Box
@@ -23,11 +22,23 @@ const MenuLayout = ({ isOpen, onClose }: MenuLayoutProps) => {
         flexDirection={"column"}
         transition={"left 0.5s"}
       >
-        {routers.map((route: any, index: number) => (
-          <Button key={index} mb={"10px"}>
-            <Link to={route.link}>{route.title}</Link>
-          </Button>
-        ))}
+        {routers.map(
+          (route: any, index: number) =>
+            route.title && (
+              <ChakraLink
+                key={index}
+                as={ReactRouterLink}
+                variant={"button"}
+                to={route.link}
+                display={"flex"}
+                justifyContent={"center"}
+                mb={"10px"}
+                py={"5px"}
+              >
+                {route.title}
+              </ChakraLink>
+            )
+        )}
 
         <Button
           position={"absolute"}

@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import BaseApi from "~/apiConfig/baseApi";
 import useApi from "./useApi";
 
 const useProductSale = () => {
   const [products, setProducts] = useState([]);
   const { productSale } = useApi();
-  const { data: dataProduct, isLoading } = productSale;
+  const { data: dataProduct, isLoading } = productSale();
 
   const getTopSale = () => {
-    if (products.length <= 0) return;
+    if (dataProduct && dataProduct.data.length <= 0) return;
     return products
       .map((product: any) => {
         return {
@@ -20,19 +19,11 @@ const useProductSale = () => {
   };
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const baseApi = new BaseApi();
-        const response = await baseApi.productSale();
-        setProducts(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchProduct();
-  }, []);
+    if (!dataProduct) return;
+    setProducts(dataProduct.data);
+  }, [dataProduct]);
 
-  return { products, getTopSale };
+  return { isLoading, products, getTopSale };
 };
 
 export default useProductSale;

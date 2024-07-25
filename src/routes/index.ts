@@ -1,10 +1,11 @@
+import HomePage from "~/pages/HomePage";
 import TikiPage from "~/pages/TikiPage";
 
 const routers = [
   {
     link: "/",
     title: "Home",
-    element: TikiPage,
+    element: HomePage,
   },
   {
     link: "/tiki",

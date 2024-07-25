@@ -1,25 +1,13 @@
-import {
-  Button,
-  Center,
-  Image,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tooltip,
-  Tr,
-} from "@chakra-ui/react";
-import { useCallback, useState } from "react";
+import { Button, Center, Image, Td, Tooltip, Tr } from "@chakra-ui/react";
+import { useMemo, useState } from "react";
+import UITable from "~/components/UITable";
 import { formatVND } from "~/helper";
 import useProductSale from "~/hooks/useProductSale";
-import UILoading from "../UILoading";
 const ProductTiki = () => {
   const [page, setPage] = useState(1);
-  const { products, getTopSale } = useProductSale();
+  const { isLoading, products, getTopSale } = useProductSale();
 
-  const renderTopSale = useCallback(() => {
+  const renderTopSale = useMemo(() => {
     const dataRender = getTopSale();
 
     if (!dataRender) return;
@@ -56,6 +44,7 @@ const ProductTiki = () => {
         </Tr>
       ));
   }, [products, page]);
+  
   return (
     <>
       <Center>
@@ -77,25 +66,20 @@ const ProductTiki = () => {
           Next
         </Button>
       </Center>
-      <TableContainer w={"100%"} mb={10}>
-        <Table variant="striped" colorScheme="teal">
-          <Thead>
-            <Tr>
-              <Th>STT</Th>
-              <Th>Tên</Th>
-              <Th>Hình ảnh</Th>
-              <Th isNumeric>Giá gốc</Th>
-              <Th isNumeric>Giảm còn</Th>
-              <Th isNumeric>Số tiền giảm</Th>
-            </Tr>
-          </Thead>
-          {products.length > 0 ? (
-            <Tbody>{renderTopSale()}</Tbody>
-          ) : (
-            <UILoading />
-          )}
-        </Table>
-      </TableContainer>
+      <UITable
+        isLoading={isLoading}
+        dataTable={{
+          th: [
+            { title: "STT", atr: {} },
+            { title: "Tên", atr: {} },
+            { title: "Hình ảnh", atr: {} },
+            { title: "Giá gốc", atr: { isNumeric: true } },
+            { title: "Giảm còn", atr: { isNumeric: true } },
+            { title: "Số tiền giảm", atr: { isNumeric: true } },
+          ],
+          tb: renderTopSale,
+        }}
+      />
     </>
   );
 };

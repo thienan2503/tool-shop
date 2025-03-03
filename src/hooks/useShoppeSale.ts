@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import useApi from "./useApi";
 
-const useProductSale = () => {
+const useShoppeSale = () => {
   const [products, setProducts] = useState([]);
-  const { productSale } = useApi();
-  const { data: dataProduct, isLoading } = productSale();
+  const { shoppeFlashSale } = useApi();
+  const { data: dataProduct, isLoading } = shoppeFlashSale();
 
   const getTopSale = () => {
     if (dataProduct && dataProduct.data.length <= 0) return;
@@ -13,10 +13,8 @@ const useProductSale = () => {
       .map((product: any) => {
         return {
           ...product,
-          price_sale: product.original_price - product.price,
         };
       })
-      .sort((a, b) => b.price_sale - a.price_sale);
   };
 
   useEffect(() => {
@@ -27,4 +25,4 @@ const useProductSale = () => {
   return { isLoading, products, getTopSale };
 };
 
-export default useProductSale;
+export default useShoppeSale;

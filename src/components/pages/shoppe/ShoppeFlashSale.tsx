@@ -2,19 +2,19 @@ import { Button, Center, Image, Td, Tooltip, Tr } from "@chakra-ui/react";
 import { useMemo, useState } from "react";
 import UITable from "~/components/UITable";
 import { formatVND } from "~/helper";
-import useProductSale from "~/hooks/useProductSale";
-const ProductTiki = () => {
+import useShoppeSale from "~/hooks/useShoppeSale";
+const ShoppeFlashSale = () => {
   const [page, setPage] = useState(1);
-  const { isLoading, products, getTopSale } = useProductSale();
+  const { isLoading, products, getTopSale } = useShoppeSale();
 
   const renderTopSale = useMemo(() => {
     const dataRender = getTopSale();
+    console.log(dataRender);
 
     if (!dataRender) return [];
     return dataRender
       .slice(page - 1, page + 9)
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      .map((product: any, index: number) => (
+      .map((product, index: number) => (
         <Tr key={product.id}>
           <Td>{page + index}</Td>
           <Td>
@@ -85,4 +85,4 @@ const ProductTiki = () => {
   );
 };
 
-export default ProductTiki;
+export default ShoppeFlashSale;

@@ -11,21 +11,30 @@ const useApi = () => {
       revalidateOnReconnect: false,
       refreshWhenOffline: true,
       refreshWhenHidden: false,
-      refreshInterval: 0,
     };
   }, []);
 
   return {
     productSale: () =>
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       useSWR(
         "/internal/1038653/products/YqhLPyoyqQGK36Iz-sIxz",
         async () => await baseApi.productSale(),
         { ...swrConfig }
       ),
     productStore: (param: { cursor: number; limit: number }) =>
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       useSWR(
         `/collections/13567&cursor=${param.cursor}&limit=${param.limit}`,
         async () => await baseApi.productStore(param),
+        { ...swrConfig }
+      ),
+
+    shoppeFlashSale: () =>
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      useSWR(
+        `/flash_sale/flash_sale_batch_get_items`,
+        async () => await baseApi.shoppeFlashSale(),
         { ...swrConfig }
       ),
   };

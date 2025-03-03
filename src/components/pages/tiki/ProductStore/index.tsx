@@ -6,6 +6,7 @@ import useApi from "~/hooks/useApi";
 
 const FIRST_PAGE = 1;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ProductRow = ({ product, index }: any) => (
   <Tr
     key={product.id}
@@ -33,6 +34,7 @@ const ProductRow = ({ product, index }: any) => (
         w={"60px"}
         height={"60px"}
         alt="Dan Abramov"
+        loading="lazy"
       />
     </Td>
     <Td isNumeric>{formatVND(product.original_price)}</Td>
@@ -53,13 +55,13 @@ const ProductTiki = () => {
     if(!dataProduct?.data) return [];
     return dataProduct?.data
       .sort(
-        (a: any, b: any) =>
+        (a: { original_price: number; price: number; }, b: { original_price: number; price: number; }) =>
           b.original_price - b.price - (a.original_price - a.price)
       )
-      .map((product: any, index: number) => (
+      .map((product: unknown, index: number) => (
         <ProductRow product={product} index={index} />
       ));
-  }, [dataProduct?.data, page]);
+  }, [dataProduct?.data]);
 
   return (
     <>
